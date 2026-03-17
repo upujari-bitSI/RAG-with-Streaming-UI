@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>RAG Chatbot</h2>
+                <p class="subtitle">Local LLM + Your Documents</p>
+            </div>
+
+            <div class="upload-section">
+                <h3>Upload Documents</h3>
+                <p class="upload-hint">Supported: PDF, TXT, MD, DOCX</p>
+                <label class="upload-btn" for="file-upload">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Choose File
+                </label>
+                <input type="file" id="file-upload" accept=".pdf,.txt,.md,.docx" hidden>
+                <div id="upload-status" class="upload-status"></div>
+            </div>
+
+            <div class="store-info">
+                <h3>Knowledge Base</h3>
+                <p id="chunk-count">Loading...</p>
+                <button id="clear-btn" class="clear-btn">Clear All Documents</button>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>Powered by Ollama + ChromaDB</p>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-message">
+                    <h1>Welcome to RAG Chatbot</h1>
+                    <p>Upload documents and ask questions about them, or just chat with the local LLM.</p>
+                    <div class="suggestions">
+                        <button class="suggestion" onclick="askSuggestion(this)">What documents do you have?</button>
+                        <button class="suggestion" onclick="askSuggestion(this)">Summarize the uploaded content</button>
+                        <button class="suggestion" onclick="askSuggestion(this)">What can you help me with?</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <form id="chat-form" class="chat-form">
+                    <div class="input-wrapper">
+                        <textarea
+                            id="chat-input"
+                            placeholder="Ask a question..."
+                            rows="1"
+                            autofocus
+                        ></textarea>
+                        <button type="submit" id="send-btn" class="send-btn" title="Send message">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
